@@ -159,7 +159,8 @@ func jsonToFileLogWriter(filename string, ff *FileConfig) (*FileLogWriter, bool)
 	rotate := false
 
 	if len(ff.Filename) > 0 {
-		file = ff.Filename
+		hostname, _ := os.Hostname()
+		file = strings.Replace(ff.Filename, "{hostname}", hostname, -1)
 	}
 	if len(ff.Pattern) > 0 {
 		format = strings.Trim(ff.Pattern, " \r\n")
